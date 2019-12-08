@@ -1,0 +1,11 @@
+aclocal.m4
+autoconf-aux/*
+autom4te.cache/*
+configure
+AUTHORS
+ChangeLog
+COPYING
+INSTALL
+NEWS
+Makefile.in
+README
