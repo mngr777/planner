@@ -1,0 +1,7 @@
+{
+    "items": [
+        {"duration": 15, "distance": 20},
+        {"duration": 240, "distance": 0},
+        {"duration": 30, "distance": 25}
+    ]
+}

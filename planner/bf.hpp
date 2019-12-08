@@ -2,16 +2,16 @@
 #define PLANNER_BF_HPP_
 
 #include <vector>
-#include "plan.hpp"
-#include "planner.hpp"
-#include "tariff.hpp"
+#include "../plan.hpp"
+#include "../planner.hpp"
+#include "../tariff.hpp"
 
-class PlannerBF {
+class PlannerBF : public Planner {
 public:
     PlannerBF(TariffList& tariff_list)
         : tariff_list_(tariff_list) {}
 
-    Sequence plan(const Plan& plan);
+    Sequence plan(const Plan& plan) override;
 
 private:
     struct Result {

@@ -1,4 +1,4 @@
-#include "planner_bf.hpp"
+#include "bf.hpp"
 #include <limits>
 
 Sequence PlannerBF::plan(const Plan& plan) {

@@ -3,25 +3,14 @@
 
 #include <ostream>
 #include "plan.hpp"
+#include "sequence.hpp"
 #include "tariff.hpp"
 
-using Sequence = std::vector<TariffIdx>;
-
-void print_sequence(
-    std::ostream& os,
-    const TariffList& tariff_list,
-    const Sequence& sequence);
-
-
-class Estimator {
+class Planner {
 public:
-    Estimator(TariffList& tariff_list)
-        : tariff_list_(tariff_list) {}
+    virtual ~Planner() {}
 
-    Cost estimate(const Plan& plan, const Sequence& sequence) const;
-
-private:
-    TariffList& tariff_list_;
+    virtual Sequence plan(const Plan& plan) = 0;
 };
 
 #endif
