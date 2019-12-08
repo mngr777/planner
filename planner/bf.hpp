@@ -6,6 +6,8 @@
 #include "../planner.hpp"
 #include "../tariff.hpp"
 
+// Basic brute-force solution to (hopefully) improve upon
+// and test againts
 class PlannerBF : public Planner {
 public:
     PlannerBF(TariffList& tariff_list)
