@@ -6,12 +6,12 @@
 
 using Sequence = std::vector<TariffIdx>;
 
-class Validator {
+class Estimator {
 public:
-    Validator(TariffList& tariff_list)
+    Estimator(TariffList& tariff_list)
         : tariff_list_(tariff_list) {}
 
-    bool validate(const Plan& plan, const Sequence& sequence);
+    Cost estimate(Plan& plan, const Sequence& sequence);
 
 private:
     TariffList& tariff_list_;

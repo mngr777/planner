@@ -23,6 +23,9 @@ public:
           duration(duration),
           distance(distance) {}
 
+    bool has_idle() const { return price_idle > 0; }
+    bool has_additional() const { return price_additional > 0; }
+
     const std::string name;
     const Cost price;
     const Cost price_idle;

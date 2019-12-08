@@ -19,8 +19,11 @@ test.o: test.cpp plan.hpp plan.cpp
 tariff.o: tariff.cpp tariff.hpp types.hpp
 	$(CC) -c $(CFLAGS) -o $@ $<
 
+planner.o: planner.cpp planner.hpp tariff.hpp plan.hpp types.hpp
+	$(CC) -c $(CFLAGS) -o $@ $<
+
 planner_bf.o: planner_bf.cpp planner_bf.hpp tariff.hpp plan.hpp types.hpp
 	$(CC) -c $(CFLAGS) -o $@ $<
 
-test: test.o plan.o tariff.o planner_bf.o
+test: test.o plan.o tariff.o planner.o planner_bf.o
 	$(CC) -o $@ $^ $(LFLAGS)

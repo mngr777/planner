@@ -8,6 +8,7 @@
 
 class Plan {
 public:
+    // Plan item
     class Item {
     public:
         Item(Duration duration, Distance distance)
@@ -21,21 +22,35 @@ public:
     };
     using ItemList = std::vector<Item>;
 
-    void add(Item item) {
-        items_.emplace_back(std::move(item));
-    }
+    Plan() :
+        duration_(0),
+        distance_(0),
+        current_idx_(0),
+        current_offset_(0) {}
 
-    void add(Duration duration, Distance distance) {
-        items_.emplace_back(duration, distance);
-    }
+
+    // Adding plan item
+    void add(Item item);
+    void add(Duration duration, Distance distance);
+
+
+    // Plan pointer
+    const Item& current() const;
+    Distance advance(Duration duration, Distance distance);
+    bool is_finished() const;
+    void reset();
 
     const ItemList& items() const { return items_; }
 
-    Duration duration() const;
-    Distance distance() const;
+    Duration duration() const { return duration_; }
+    Distance distance() const { return distance_; }
 
 private:
-     ItemList items_;
+    ItemList items_;
+    Duration duration_;
+    Distance distance_;
+    unsigned current_idx_;
+    Duration current_offset_;
 };
 
 std::ostream& operator<<(std::ostream& os, const Plan& plan);

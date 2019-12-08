@@ -1,13 +1,27 @@
 #include "planner.hpp"
+#include <stdexcept>
 
-bool Validator::validate(const Plan& plan, const Sequence& sequence) {
-    const Plan::ItemList& items = plan.items();
-    auto it = items.begin();
-    auto end = items.end();
-    unsigned seq_idx = 0;
-    unsigned item_offset = 0, seq_offset = 0;
+Cost Estimator::estimate(Plan& plan, const Sequence& sequence) {
+    Cost total = 0;
+    plan.reset();
+    for (TariffIdx tariff_idx : sequence) {
+        if (plan.is_finished())
+            throw std::invalid_argument("plan is already finished");
 
-    while (it != end && seq_idx < sequence.size()) {
+        // NOTE: assuming that plans that can span over multiple items
+        // (duration > 1m) do not have idle price
+        const Tariff& tariff = tariff_list_.get(tariff_idx);
+        total += (tariff.has_idle() && plan.current().is_idle())
+            ? tariff.price_idle
+            : tariff.price;
 
+        Distance additional_distance = plan.advance(tariff.duration, tariff.distance);
+        if (tariff.has_additional())
+            total += (tariff.price_additional * additional_distance);
     }
+
+    if (!plan.is_finished())
+        throw std::invalid_argument("cannot finish plan");
+
+    return total;
 }
