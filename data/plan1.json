@@ -1,4 +1,8 @@
 {
+    "": "Example plan from assignment: ",
+    "": "1) 20km in 15min; 2) idle for 4 hours; 3) 25km in 30min",
+    "": "Correct answer is using per minute plan",
+
     "items": [
         {"duration": 15, "distance": 20},
         {"duration": 240, "distance": 0},
