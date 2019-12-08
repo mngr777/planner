@@ -25,10 +25,18 @@ int main(int argc, char** argv) {
     Plan plan = read_plan(argv[2]);
     std::cout << plan << std::endl;
 
+    // Output
+    std::ostream *output = &std::cout;
+    std::fstream output_file;
+    if (argc > 3) {
+        output_file = open_file(argv[3], std::ios_base::out);
+        output = &output_file;
+    }
+
     PlannerBF planner(tariff_list);
     Sequence sequence = planner.plan(plan);
 
-    print_sequence(std::cout, tariff_list, sequence);
+    print_sequence(*output, tariff_list, sequence);
 }
 
 
