@@ -1,4 +1,5 @@
 #include "bf.hpp"
+#include <cassert>
 #include <limits>
 
 Planner::Result PlannerBF::plan(const Plan& plan) {
@@ -19,18 +20,37 @@ PlannerBF::Result PlannerBF::bruteforce(
         PlanPointer pointer_tmp = pointer;
         Cost price_tmp          = price;
         Sequence sequence_tmp   = sequence;
-        sequence_tmp.push_back(tariff_idx);
+
+        const Plan::Item& current_item = pointer_tmp.current();
+
+        // Use tariff until next plan item (count times)
+        unsigned count = 1;
+        {
+            Duration current_offset = pointer_tmp.current_offset();
+            Duration left = current_item.duration - current_offset;
+            // floor(left/tariff.duration)
+            count = (left / tariff.duration)
+                + (left % tariff.duration ? 1 : 0);
+            for (unsigned i = 0; i < count; ++i)
+                sequence_tmp.push_back(tariff_idx);
+        }
+        assert(count >= 1);
 
         // Add price of selected tariff
         // NOTE: assuming that plans that can span over multiple items
         // (duration > 1m) do not have idle price
-        price_tmp += (tariff.has_idle() && pointer_tmp.current().is_idle())
-            ? tariff.price_idle
-            : tariff.price;
+        {
+            Cost tariff_price = (tariff.has_idle() && pointer_tmp.current().is_idle())
+                ? tariff.price_idle
+                : tariff.price;
+            price_tmp += tariff_price * count;
+        }
 
         // Advance pointer
         // Add price for additional distance
-        Distance additional_distance = pointer_tmp.advance(tariff.duration, tariff.distance);
+        Distance additional_distance = pointer_tmp.advance(
+            tariff.duration * count,
+            tariff.distance * count);
         if (tariff.has_additional())
             price_tmp += (tariff.price_additional * additional_distance);
 

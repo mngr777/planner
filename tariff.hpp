@@ -16,13 +16,7 @@ public:
         Cost price_idle,
         Cost price_additional,
         Duration duration,
-        Distance distance)
-        : name(std::move(name)),
-          price(price),
-          price_idle(price_idle),
-          price_additional(price_additional),
-          duration(duration),
-          distance(distance) {}
+        Distance distance);
 
     bool has_idle() const { return price_idle > 0; }
     bool has_additional() const { return price_additional > 0; }
@@ -51,19 +45,15 @@ public:
         Duration duration,
         Distance distance)
     {
-        list_.emplace_back(
-            std::move(name),
-            price, price_idle, price_additional,
-            duration, distance);
+        add(Tariff(
+                std::move(name),
+                price, price_idle, price_additional,
+                duration, distance));
     }
 
-    const Tariff& get(TariffIdx idx) const {
-        return list_.at(idx);
-    }
+    const Tariff& get(TariffIdx idx) const { return list_.at(idx); }
 
-    TariffIdx size() const {
-        return list_.size();
-    }
+    TariffIdx size() const { return list_.size(); }
 
     const List& list() const { return list_; }
 

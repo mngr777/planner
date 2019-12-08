@@ -1,4 +1,24 @@
 #include "tariff.hpp"
+#include <stdexcept>
+
+Tariff::Tariff(
+    std::string name,
+    Cost price,
+    Cost price_idle,
+    Cost price_additional,
+    Duration duration,
+    Distance distance)
+    : name(std::move(name)),
+      price(price),
+      price_idle(price_idle),
+      price_additional(price_additional),
+      duration(duration),
+      distance(distance)
+{
+    if (duration == 0)
+        throw std::invalid_argument("Tariff duration cannot be zero");
+}
+
 
 std::ostream& operator<<(std::ostream& os, const Tariff& tariff) {
     using std::endl;
