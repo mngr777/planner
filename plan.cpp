@@ -2,6 +2,8 @@
 #include <numeric>
 #include <stdexcept>
 
+// Plan
+
 void Plan::add(Plan::Item item) {
     items_.emplace_back(std::move(item));
     duration_ += item.duration;
@@ -13,13 +15,15 @@ void Plan::add(Duration duration, Distance distance) {
 }
 
 
-const Plan::Item& Plan::current() const {
-    return items_.at(current_idx_);
+// Plan pointer
+
+const Plan::Item& PlanPointer::current() const {
+    return plan_.items().at(current_idx_);
 }
 
-Distance Plan::advance(Duration duration, Distance distance) {
+Distance PlanPointer::advance(Duration duration, Distance distance) {
     while (!is_finished() && duration > 0) {
-        const Item& item = current();
+        const Plan::Item& item = current();
         if (!item.is_idle())
             distance -= item.distance; // take item distance from distance limit
 
@@ -37,11 +41,11 @@ Distance Plan::advance(Duration duration, Distance distance) {
     return (distance < 0.0) ? -distance : 0;
 }
 
-bool Plan::is_finished() const {
-    return current_idx_ == items_.size();
-}
+bool PlanPointer::is_finished() const {
+    return current_idx_ == plan_.items().size();
+};
 
-void Plan::reset() {
+void PlanPointer::reset() {
     current_idx_ = 0;
     current_offset_ = 0;
 }

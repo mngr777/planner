@@ -11,7 +11,7 @@ public:
     Estimator(TariffList& tariff_list)
         : tariff_list_(tariff_list) {}
 
-    Cost estimate(Plan& plan, const Sequence& sequence);
+    Cost estimate(const Plan& plan, const Sequence& sequence) const;
 
 private:
     TariffList& tariff_list_;

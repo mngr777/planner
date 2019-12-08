@@ -24,21 +24,12 @@ public:
 
     Plan() :
         duration_(0),
-        distance_(0),
-        current_idx_(0),
-        current_offset_(0) {}
-
+        distance_(0) {}
 
     // Adding plan item
     void add(Item item);
     void add(Duration duration, Distance distance);
 
-
-    // Plan pointer
-    const Item& current() const;
-    Distance advance(Duration duration, Distance distance);
-    bool is_finished() const;
-    void reset();
 
     const ItemList& items() const { return items_; }
 
@@ -49,9 +40,31 @@ private:
     ItemList items_;
     Duration duration_;
     Distance distance_;
+};
+
+
+class PlanPointer {
+public:
+    PlanPointer(const Plan& plan)
+        : plan_(plan),
+          current_idx_(0),
+          current_offset_(0) {}
+
+    const Plan::Item& current() const;
+
+    // Advance, return distance over limit
+    Distance advance(Duration duration, Distance distance);
+
+    bool is_finished() const;
+
+    void reset();
+
+private:
+    const Plan plan_;
     unsigned current_idx_;
     Duration current_offset_;
 };
+
 
 std::ostream& operator<<(std::ostream& os, const Plan& plan);
 std::ostream& operator<<(std::ostream& os, const Plan::Item& item);
