@@ -23,7 +23,8 @@ int main(int argc, char** argv) {
 
     // Read plan
     Plan plan = read_plan(argv[2]);
-    std::cout << plan << std::endl;
+    std::cout << "Plan:" << std::endl
+              << plan << std::endl;
 
     // Output
     std::ostream *output = &std::cout;
@@ -33,10 +34,14 @@ int main(int argc, char** argv) {
         output = &output_file;
     }
 
+    // Create tariff sequence
     PlannerBF planner(tariff_list);
-    Sequence sequence = planner.plan(plan);
+    Planner::Result result = planner.plan(plan);
 
-    print_sequence(*output, tariff_list, sequence);
+    // Output result
+    *output << "Tariff sequence:" << std::endl;
+    print_sequence(*output, tariff_list, result.sequence);
+    *output << "Total price: " << result.price << std::endl;
 }
 
 

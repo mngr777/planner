@@ -13,18 +13,9 @@ public:
     PlannerBF(TariffList& tariff_list)
         : tariff_list_(tariff_list) {}
 
-    Sequence plan(const Plan& plan) override;
+    Result plan(const Plan& plan) override;
 
 private:
-    struct Result {
-        Result(Cost price, Sequence sequence)
-            : price(price),
-              sequence(sequence) {}
-
-        Cost price;
-        Sequence sequence;
-    };
-
     Result bruteforce(
         PlanPointer pointer,
         Sequence sequence,

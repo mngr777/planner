@@ -1,9 +1,9 @@
 #include "bf.hpp"
 #include <limits>
 
-Sequence PlannerBF::plan(const Plan& plan) {
+Planner::Result PlannerBF::plan(const Plan& plan) {
     PlanPointer pointer(plan);
-    return bruteforce(pointer, Sequence(), 0.0).sequence;
+    return bruteforce(pointer, Sequence(), 0.0);
 }
 
 PlannerBF::Result PlannerBF::bruteforce(

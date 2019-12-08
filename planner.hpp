@@ -8,9 +8,18 @@
 
 class Planner {
 public:
+    struct Result {
+        Result(Cost price, Sequence sequence)
+            : price(price),
+              sequence(sequence) {}
+
+        Cost price;
+        Sequence sequence;
+    };
+
     virtual ~Planner() {}
 
-    virtual Sequence plan(const Plan& plan) = 0;
+    virtual Result plan(const Plan& plan) = 0;
 };
 
 #endif
