@@ -59,6 +59,9 @@ public:
 
     void reset();
 
+    unsigned current_idx() const { return current_idx_; }
+    unsigned current_offset() const { return current_offset_; }
+
 private:
     const Plan plan_;
     unsigned current_idx_;
@@ -68,5 +71,7 @@ private:
 
 std::ostream& operator<<(std::ostream& os, const Plan& plan);
 std::ostream& operator<<(std::ostream& os, const Plan::Item& item);
+
+std::ostream& operator<<(std::ostream& os, const PlanPointer& pointer);
 
 #endif

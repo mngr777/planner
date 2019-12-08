@@ -59,8 +59,8 @@ std::ostream& operator<<(std::ostream& os, const Plan& plan) {
     const Plan::ItemList& items = plan.items();
     for (unsigned i = 0; i < items.size(); ++i)
         os << (i + 1) << ": " << items[i] << endl;
-    os << "Duration: " << plan.duration() << endl;
-    os << "Distance: " << plan.distance() << endl;
+    os << "Total duration: " << plan.duration() << endl;
+    os << "Total distance: " << plan.distance() << endl;
     return os;
 }
 
@@ -70,4 +70,11 @@ std::ostream& operator<<(std::ostream& os, const Plan::Item& item) {
     if (item.is_idle())
         os << " (idle)";
     return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const PlanPointer& pointer) {
+    return os << "("
+       << (pointer.current_idx() + 1) << " "
+       << pointer.current_offset()
+       << ")";
 }

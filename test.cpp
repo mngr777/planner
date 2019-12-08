@@ -24,25 +24,21 @@ int main() {
     Plan plan;
     plan.add(15, 20);
     plan.add(4 * 60, 0);
-    plan.add(30, 250);
+    plan.add(2 * 60, 15);
+    plan.add(30, 25);
+    plan.add(100, 10);
 
     cout << plan << endl;
 
-    /// Plan
+    // Brute force planning
     PlannerBF planner_bf(tariff_list);
-    planner_bf.plan(plan);
-
-    /// Sequence
-    Sequence sequence;
-    for (unsigned i = 0; i < plan.duration(); ++i)
-        sequence.push_back(0);
+    Sequence sequence = planner_bf.plan(plan);
+    print_sequence(std::cout, tariff_list, sequence);
 
     // Estimate
     Estimator estimator(tariff_list);
-    try {
-        Cost price = estimator.estimate(plan, sequence);
-        cout << "Total: " << price << endl;
-    } catch (std::invalid_argument& e) {
-        cout << e.what() << endl;
-    }
+    Cost price = estimator.estimate(plan, sequence);
+    cout << "Total price: " << price << endl;
+
+    cout << estimator.estimate(plan, {3}) << std::endl;
 }

@@ -1,6 +1,7 @@
 #ifndef TARIFF_HPP_
 #define TARIFF_HPP_
 
+#include <limits>
 #include <ostream>
 #include <string>
 #include <utility>
@@ -56,7 +57,7 @@ public:
             duration, distance);
     }
 
-    const Tariff& get(TariffIdx idx) {
+    const Tariff& get(TariffIdx idx) const {
         return list_.at(idx);
     }
 
@@ -71,6 +72,7 @@ private:
 };
 
 using TariffIdx = TariffList::TariffIdx;
+const TariffIdx NoTariffIdx = std::numeric_limits<TariffIdx>::max();
 
 std::ostream& operator<<(std::ostream& os, const Tariff& tariff);
 std::ostream& operator<<(std::ostream& os, const TariffList& tariff_list);

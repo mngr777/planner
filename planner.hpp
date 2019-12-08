@@ -1,10 +1,17 @@
 #ifndef PLANNER_HPP_
 #define PLANNER_HPP_
 
+#include <ostream>
 #include "plan.hpp"
 #include "tariff.hpp"
 
 using Sequence = std::vector<TariffIdx>;
+
+void print_sequence(
+    std::ostream& os,
+    const TariffList& tariff_list,
+    const Sequence& sequence);
+
 
 class Estimator {
 public:
