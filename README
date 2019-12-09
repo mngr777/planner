@@ -5,13 +5,21 @@ Requirements:
   - GNU Autotools
   - Boost.PropertyTree
 
+Building:
+  $ cd /path/to/src-dir
+  $ ./autogen.sh
+  $ ./configure
+  $ make
+
 Usage:
   $ /path/to/path_trip <tariff-list-filename> <plan-filename> [<output-filename>|"-"]
 
 Example:
   $ ./plan_trip tariff-list.json plan.json output.txt
 
-Example input files: data/tariffs.json, data/plan1.json
+Example input files: 
+  - data/tariffs.json
+  - data/plan1.json
 
 Example output:
   Tariff sequence:
