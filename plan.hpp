@@ -17,9 +17,10 @@ public:
 
         bool is_idle() const { return distance == 0.0; }
 
-        const Duration duration;
-        const Distance distance;
+        Duration duration;
+        Distance distance;
     };
+
     using ItemList = std::vector<Item>;
 
     Plan() :
