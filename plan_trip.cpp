@@ -9,12 +9,15 @@
 #include "tariff.hpp"
 #include "utils.hpp"
 
+
 static void usage(const std::string& name);
 
 static Plan read_plan(const std::string& name);
 static TariffList read_tariff_list(const std::string& name);
 
 int main(int argc, char** argv) {
+    const std::string NoFilename("-");
+
     if (argc < 3)
         usage(argv[0]);
 
@@ -29,7 +32,7 @@ int main(int argc, char** argv) {
     // Output
     std::ostream *output = &std::cout;
     std::fstream output_file;
-    if (argc > 3) {
+    if (argc > 3 && NoFilename != argv[3]) {
         output_file = open_file(argv[3], std::ios_base::out);
         output = &output_file;
     }
@@ -50,6 +53,7 @@ void usage(const std::string& name) {
               << " $ " << name
               << " <tariff-list-filename>"
               << " <plan-filename>"
+              << " [<output-filename>|\"-\"]"
               << std::endl;
     std::exit(EXIT_FAILURE);
 }

@@ -7,15 +7,15 @@
 
 namespace io {
 
-const char PathTariffs[]          = "tariffs";
-const char FieldName[]            = "name";
-const char FieldPrice[]           = "price";
-const char FieldPriceIdle[]       = "price_idle";
-const char FieldPriceAdditional[] = "price_additional";
-const char FieldDuration[]        = "duration";
-const char FieldDistance[]        = "distance";
+static const char PathTariffs[]          = "tariffs";
+static const char FieldName[]            = "name";
+static const char FieldPrice[]           = "price";
+static const char FieldPriceIdle[]       = "price_idle";
+static const char FieldPriceAdditional[] = "price_additional";
+static const char FieldDuration[]        = "duration";
+static const char FieldDistance[]        = "distance";
 
-const char DefaultName[] = "<noname>";
+static const char DefaultName[] = "<noname>";
 
 
 TariffList read_tariff_list(std::istream& is) {

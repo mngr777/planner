@@ -1,0 +1,19 @@
+  The planner takes tariff list and plan file in JSON format and outputs
+an optimal sequence of tariffs and total price.
+
+Requirements:
+  - GNU Autotools
+  - Boost.PropertyTree
+
+Usage:
+  $ /path/to/path_trip <tariff-list-filename> <plan-filename> [<output-filename>|"-"]
+
+Example:
+  $ ./plan_trip tariff-list.json plan.json output.txt
+
+Example input files: data/tariffs.json, data/plan1.json
+
+Example output:
+  Tariff sequence:
+  1: 285 x "Per Minute"
+  Total price: 30.3

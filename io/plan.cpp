@@ -6,9 +6,9 @@
 
 namespace io {
 
-const char PathItems[]     = "items";
-const char FieldDuration[] = "duration";
-const char FieldDistance[] = "distance";
+static const char PathItems[]     = "items";
+static const char FieldDuration[] = "duration";
+static const char FieldDistance[] = "distance";
 
 
 Plan read_plan(std::istream& is) {

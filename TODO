@@ -1,2 +1,1 @@
-* Add explicit copy and assignment operators.
 * Change Sequence from [tariff_idx1, tariff_idx2, ...] to [{times: n1, tariff_idx: tariff_idx1, ...}]
