@@ -2,14 +2,17 @@
 an optimal sequence of tariffs and total price.
 
 Requirements:
-  - GNU Autotools
+  - GNU Autotools (Linux) or Visual Studio (Windows)
   - Boost.PropertyTree
 
-Building:
+Building with Autotools:
   $ cd /path/to/src-dir
   $ ./autogen.sh
   $ ./configure
   $ make
+
+Building with Visual Studio:
+  Open plan_trip.sln, add Boost include path to project, build.
 
 Usage:
   $ /path/to/path_trip <tariff-list-filename> <plan-filename> [<output-filename>|"-"]
