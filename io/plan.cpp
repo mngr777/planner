@@ -20,7 +20,7 @@ Plan read_plan(std::istream& is) {
 
     Plan plan;
     auto items_pt = pt.get_child(PathItems);
-    for (auto pair : items_pt) {
+    for (const auto& pair : items_pt) {
         auto duration = pair.second.get<Duration>(FieldDuration);
         auto distance = pair.second.get<Distance>(FieldDistance);
         plan.add(duration, distance);

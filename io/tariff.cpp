@@ -27,7 +27,7 @@ TariffList read_tariff_list(std::istream& is) {
 
     TariffList tariff_list;
     auto pt_tariff_list = pt.get_child(PathTariffs);
-    for (auto pair : pt_tariff_list) {
+    for (const auto& pair : pt_tariff_list) {
         auto pt_tariff = pair.second;
 
         auto name             = pt_tariff.get<std::string>(FieldName, DefaultName);
