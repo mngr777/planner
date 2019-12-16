@@ -28,7 +28,7 @@ PlannerBF::Result PlannerBF::bruteforce(
         {
             Duration current_offset = pointer_tmp.current_offset();
             Duration left = current_item.duration - current_offset;
-            // floor(left/tariff.duration)
+            // ceil(left/tariff.duration)
             count = (left / tariff.duration)
                 + (left % tariff.duration ? 1 : 0);
             for (unsigned i = 0; i < count; ++i)
