@@ -5,9 +5,9 @@
 // Plan
 
 void Plan::add(Plan::Item item) {
-    items_.emplace_back(std::move(item));
     duration_ += item.duration;
     distance_ += item.distance;
+    items_.emplace_back(std::move(item));
 }
 
 void Plan::add(Duration duration, Distance distance) {
